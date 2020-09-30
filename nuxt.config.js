@@ -1,3 +1,6 @@
+require('dotenv').config();
+const {MOVIE_API_KEY} = process.env;
+
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
@@ -36,5 +39,9 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-  }
+  },
+
+  env: {
+    MOVIE_API_KEY
+  },
 }

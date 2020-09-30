@@ -30,26 +30,22 @@
 		padding-left: 70px;
 		max-width: 1300px;
 	}
-
 	.content_flex {
 		width: 100%;
 		display: flex;
 		overflow-x: scroll;
 	}
-
 	.content_flex .card {
 		padding-right:20px;
 	}
-
 	img{
 		border-radius: 10px;
 	}
-	
 </style>
 
 <script>
 	const axios = require('axios')
-	let api_key = 'api_key=1a9bc9620417d49e86cfb98890b7ccce';
+	let api_key = process.env.MOVIE_API_KEY;
 	let url = 'https://api.themoviedb.org/3/movie/now_playing?'+api_key+'&language=ja&page=1'
 
 	export default {
