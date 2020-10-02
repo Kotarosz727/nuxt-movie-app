@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Header />
         <div class="header"><h2>検索結果</h2></div>
         <div class="f-container">
             <div class="f-item" v-for="data in datas" :key="data.id">
