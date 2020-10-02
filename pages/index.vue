@@ -1,9 +1,9 @@
 <template>
 	<div class="main">
 		<div class="search">
-			<form action="">
-				<input type="text">
-				<button>search</button>
+			<form action="/search" method="get">
+				<input type="text" name="keyword" v-model="keyword">
+				<button type="submit">search</button>
 			</form>
 		</div>
 		<div class="column_header">
@@ -12,9 +12,9 @@
 		<div class="content_flex">
 			<div class="card" v-for="data in datas" :key="data.id">
 				<div class="image">
-						<a href="">
+						<nuxt-link :to="/movies/ + data.id">
 							<img v-bind:src="imgPreUrl + data.poster_path" alt="img">
-						</a>
+						</nuxt-link>
 				</div>
 				<div class="content">
 					<h3 class="title">{{ data.title }}</h3>
@@ -45,13 +45,20 @@
 
 <script>
 	const axios = require('axios')
+	let base_url = 'https://api.themoviedb.org';
+	let sub_url = '/3/movie/'; 
 	let api_key = process.env.MOVIE_API_KEY;
-	let url = 'https://api.themoviedb.org/3/movie/now_playing?'+api_key+'&language=ja&page=1'
+	let url = base_url+sub_url+'now_playing?'+api_key+'&language=ja'
+	console.log(url);
 
 	export default {
 		data: function() {
             return {
-                imgPreUrl: "http://image.tmdb.org/t/p/w185"
+				imgPreUrl: "http://image.tmdb.org/t/p/w185",
+				base_url,
+				sub_url,
+				api_key,
+				keyword: ""
             }
         }, 
 		asyncData({params, error}){
@@ -63,7 +70,12 @@
 			.catch((e => {
 			  error({datas: e.response.status_message, message: "Error"})
 			}))
-		}
+		},
+		// methods: {
+		// 	submitClick() {
+		// 		this.$router.push("/search?" + this.keyword)
+		// 	}
+		// }
 	}
 </script>
 
