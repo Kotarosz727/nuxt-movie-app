@@ -1,5 +1,7 @@
 require('dotenv').config();
 const {MOVIE_API_KEY} = process.env;
+const {FIREBASE_PROJECT_ID} = process.env;
+
 
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
@@ -42,6 +44,7 @@ export default {
   },
 
   env: {
-    MOVIE_API_KEY
+    MOVIE_API_KEY,
+    FIREBASE_PROJECT_ID
   },
 }

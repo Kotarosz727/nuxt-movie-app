@@ -32,9 +32,8 @@
     } 
 
     .image img {
-        padding-top: 30px;
+        padding-top: 80px;
         padding-right: 30px;
-        border-radius: 5px;
         height: 300px;
         width: 200px;
     }

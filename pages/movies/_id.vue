@@ -5,6 +5,7 @@
             <div class="detail">
                 <div class="detail_image">
                     <img v-bind:src="imgPreUrl + detail.poster_path" alt="img">
+                    <button @click="$store.dispatch('favorites/add', { id: detail.id, title: detail.original_title, poster_path: detail.poster_path })">見たいリストに追加</button>
                 </div>
                 <div class="info">
                     <div class="title">
@@ -85,12 +86,17 @@
 </style>
 
 <script>
+    import { mapGetters } from 'vuex'
+
     const axios = require('axios')
     let base_url = 'https://api.themoviedb.org';
 	let sub_url = '/3/movie/'; 
     let api_key = process.env.MOVIE_API_KEY;
     
     export default {
+        created: function() {
+            this.$store.dispatch('favorites/init')
+        },
         data: function(){
             return {
                 imgPreUrl: "http://image.tmdb.org/t/p/w200",
@@ -110,7 +116,8 @@
                 detail: detail.data,
                 similars: similars.data.results,
             }
-        }
+        },
+        
         
     }
 </script>
