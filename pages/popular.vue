@@ -39,7 +39,7 @@
         data: function() {
             return {
                 imgPreUrl: "http://image.tmdb.org/t/p/w185",
-                page: 1,
+                page: 2,
                 datas: []
             }
         }, 
