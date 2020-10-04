@@ -22,3 +22,13 @@
         top: 0;
     }
 </style>
+<script>
+    export default {
+        data: function() {
+        return {
+            keyword: ""
+        }
+    }
+    }
+    
+</script>

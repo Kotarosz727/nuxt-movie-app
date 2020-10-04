@@ -1,6 +1,6 @@
 <template>
     <div class="column_header">
-        <nuxt-link to="playing">
+        <nuxt-link to="/">
             <h2>上映中</h2>
         </nuxt-link>
         <nuxt-link to="rated">

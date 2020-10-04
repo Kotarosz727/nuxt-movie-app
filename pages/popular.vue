@@ -16,6 +16,7 @@
                     {{ data.title }}
                 </div>
             </div>
+            <infinite-loading @infinite="infiniteHandler"></infinite-loading>
         </div>
         </div>
     </div>
@@ -26,17 +27,20 @@
 </style>
 
 <script>
+    import InfiniteLoading from 'vue-infinite-loading';
     const axios = require('axios')
-	let base_url = 'https://api.themoviedb.org';
+    let base_url = 'https://api.themoviedb.org';
 	let sub_url = '/3/movie/'; 
-	let country_url = '&language=en-US&page=1'
+	let country_url = '&language=en-US'
 	let api_key = process.env.MOVIE_API_KEY;
 	let popular_url = base_url + sub_url + 'popular?' + api_key + country_url;
 
     export default {
         data: function() {
             return {
-				imgPreUrl: "http://image.tmdb.org/t/p/w185",
+                imgPreUrl: "http://image.tmdb.org/t/p/w185",
+                page: 1,
+                datas: []
             }
         }, 
 		async asyncData({ params }) {
@@ -44,6 +48,27 @@
 			return {
 				datas: data.results,
 			}
-		}
+        },
+        methods: {
+            infiniteHandler($state) {
+            axios.get((popular_url + this.page), {
+                params: {
+                    page: this.page,
+                },
+            }).then(({ data }) => {
+                const datas = data.results;
+                console.log(datas);
+                if (datas.length) {
+                    this.page += 1;
+                    this.datas.push(...datas);
+                    $state.loaded();
+                } else {
+                    $state.complete();
+                }
+            }).catch((error)=>{
+                console.log('error')
+            })
+            },
+        },
     }
 </script>
