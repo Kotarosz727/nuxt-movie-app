@@ -6,6 +6,7 @@ const favoritesRef = db.collection('favorites')
 
 export const state = () => ({
     favorites: [],
+    detail: ''
 })
 
 export const actions = {
@@ -23,6 +24,16 @@ export const actions = {
         }
     }),
     remove: firestoreAction((context, id)=> {
-        favoritesRef.doc(id).delete()
+        let intId = Number(id)
+        var favorites = favoritesRef.where('movie_id', '==', intId);
+
+        favorites.get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              doc.ref.delete();
+            });
+        });
     }),
+    getDetail: firestoreAction((context, id)=>  {
+         state.detail = favoritesRef.where('movie_id', '==', 'id').get()   
+    })
 }

@@ -62,7 +62,6 @@
             }
         }, 
 		async asyncData({ params }) {
-            let page = 1
             const { data } = await axios.get(now_playing_url)
 			return {
 				datas: data.results,

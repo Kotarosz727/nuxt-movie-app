@@ -5,7 +5,9 @@
             <div class="detail">
                 <div class="detail_image">
                     <img v-bind:src="imgPreUrl + detail.poster_path" alt="img">
-                    <button @click="$store.dispatch('favorites/add', { id: detail.id, title: detail.original_title, poster_path: detail.poster_path })">見たいリストに追加</button>
+                    <div id="msg"></div>
+                    <button v-if="favorite.length" @click="removeFavorite(detail.id)">見たいリストから解除</button>
+                    <button v-else @click="addFavorite(detail.id, detail.original_title, detail.poster_path)">見たいリストに追加</button>
                 </div>
                 <div class="info">
                     <div class="title">
@@ -86,13 +88,13 @@
 </style>
 
 <script>
-    import { mapGetters } from 'vuex'
-
+    import firebase from '~/plugins/firebase'
+    import { firestoreAction } from 'vuexfire'
     const axios = require('axios')
     let base_url = 'https://api.themoviedb.org';
 	let sub_url = '/3/movie/'; 
     let api_key = process.env.MOVIE_API_KEY;
-    
+
     export default {
         created: function() {
             this.$store.dispatch('favorites/init')
@@ -102,22 +104,56 @@
                 imgPreUrl: "http://image.tmdb.org/t/p/w200",
 				base_url,
 				sub_url,
-				api_key
+                api_key,
+                favorite: [],
+                id: '',
+                func1: ''
             }
         },
         async asyncData ({ params }) {
-            const [detail, similars] = await Promise.all([
+            let favorite = []
+            let id = Number(params.id)
+
+            const [detail, similars, ] = await Promise.all([
                 axios.get(base_url + sub_url + params.id + '?' + api_key + '&language=ja'),
-                axios.get(base_url + sub_url + params.id + '/similar?' + api_key + '&language=ja&page=1')
+                axios.get(base_url + sub_url + params.id + '/similar?' + api_key + '&language=ja'),
+                    
             ]);
-            console.log(base_url + sub_url + params.id + '?' + api_key + '&language=ja');
-            console.log(base_url + sub_url + params.id + '/similar?' + api_key + '&language=ja&page=1')
+
+            await firebase.firestore().collection('favorites').where('movie_id', '==', id).get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        favorite.push(doc.data());
+                    });
+            })
+            
             return {
                 detail: detail.data,
                 similars: similars.data.results,
+                favorite: favorite
             }
         },
-        
-        
-    }
+        methods: {
+            async addFavorite(id, title, poster_path) {
+                this.$store.dispatch('favorites/add', { id: id, title: title, poster_path: poster_path })
+
+                var msg = document.getElementById('msg')
+                msg.innerHTML = '見たいリストに追加しました。'
+
+                await firebase.firestore().collection('favorites').where('movie_id', '==', id).get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        this.favorite.push(doc.data());
+                    });
+                })
+            },
+            removeFavorite(id) {
+                this.$store.dispatch('favorites/remove', id)
+                this.favorite = []
+                var msg = document.getElementById('msg')
+                msg.innerHTML = '見たいリストから除外しました。'
+            }
+        }
+    }    
+
 </script>
