@@ -1,13 +1,13 @@
 <template>
     <div class="column_header">
-        <nuxt-link to="/">
-            <h2>上映中</h2>
+        <nuxt-link id="playing_menu" to="/">
+            <button type="button">上映中</button>
         </nuxt-link>
-        <nuxt-link to="rated">
-            <h2>高い評価</h2>
+        <nuxt-link id="rated_menu" to="rated">
+            <button type="button">高い評価</button>
         </nuxt-link>
-        <nuxt-link to="popular">
-            <h2>人気の映画</h2>
+        <nuxt-link id="popular_menu" to="popular">
+            <button type="button">人気の映画</button>
         </nuxt-link>
     </div>
 </template>
@@ -16,7 +16,7 @@
     .column_header {
 		display: inline-flex;
 	}
-	.column_header h2 {
+	.column_header button {
 		padding-right: 15px;
 	}
 </style>

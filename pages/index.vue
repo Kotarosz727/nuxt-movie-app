@@ -2,7 +2,6 @@
     <div>
         <Header />
         <div class="main">
-            <div class="header"><h3>上映中</h3></div>
             <Menu />
             <div class="f-container">
                 <div class="f-item" v-for="data in datas" :key="data.id">
@@ -23,6 +22,11 @@
 </template>
 
 <style>
+    .main {
+		padding-top: 30px;
+		padding-left: 70px;
+		max-width: 1400px;
+	}
     .f-container {
         display: flex;
         flex-direction: column;
@@ -36,7 +40,7 @@
     } 
 
     .image img {
-        padding-top: 80px;
+        padding-top: 50px;
         padding-right: 30px;
         height: 300px;
         width: 200px;
@@ -88,5 +92,9 @@
             })
             },
         },
+        mounted() {
+            let elm = document.getElementById('playing_menu')
+            elm.style.cssText = "color: blue; background-color: yellow"
+        }
     }
 </script>

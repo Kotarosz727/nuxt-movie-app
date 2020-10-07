@@ -1,26 +1,23 @@
 <template>
-    <header>
-        <nuxt-link to="/"><h1>Movie APP</h1></nuxt-link>
-        <div class="search">
-            <v-form action="/search" method="get">
-                <input type="text" name="keyword" v-model="keyword">
-                <button type="submit">search</button>
-            </v-form>
-        </div>
+    <v-toolbar prominent src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
+        <v-toolbar-title>
+            <nuxt-link to="/">Movie APP</nuxt-link>
+        </v-toolbar-title>
+
+         <v-spacer></v-spacer>
+
+        <!-- <v-form action="/search" method="get">
+            <input type="text" name="keyword" v-model="keyword" style="background-color:white">
+            <input type="submit" style="background-color:orange" value="search">
+        </v-form> -->
+
+         <v-spacer></v-spacer>
+
         <nuxt-link to="/favorites"><h3 class="favorites">見たいリスト</h3></nuxt-link>
-    </header>
-    
+    </v-toolbar>
 </template>
 <style>
-    header {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        padding: 30px 4% 10px;
-        background-color: aqua;
-        position: fixed;
-        top: 0;
-    }
+    
 </style>
 <script>
     export default {

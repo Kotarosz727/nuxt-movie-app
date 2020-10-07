@@ -6,8 +6,8 @@
                 <div class="detail_image">
                     <img v-bind:src="imgPreUrl + detail.poster_path" alt="img">
                     <div id="msg"></div>
-                    <v-btn v-if="favorite.length" @click="removeFavorite(detail.id)" elevation="10" medium>見たいリストから解除</v-btn>
-                    <v-btn v-else @click="addFavorite(detail.id, detail.original_title, detail.poster_path)" elevation="7" medium>見たいリストに追加</v-btn>
+                    <v-btn style="background-color: pink;" v-if="favorite.length" @click="removeFavorite(detail.id)" elevation="10" medium>見たいリストから解除</v-btn>
+                    <v-btn style="background-color: pink;" v-else @click="addFavorite(detail.id, detail.original_title, detail.poster_path)" elevation="7" medium>見たいリストに追加</v-btn>
                 </div>
                 <div class="info">
                     <div class="title">
@@ -45,11 +45,7 @@
 </template>
 
 <style>
-    .main {
-		padding-top: 100px;
-		padding-left: 70px;
-		max-width: 1400px;
-	}
+    
     .flex-container {
 		display: flex;
 		overflow-x: scroll;
@@ -84,6 +80,9 @@
     .similar_content img {
         height: 150px;
         width: 100px;
+    }
+    .vbtn {
+        background-color: blue;
     }
 </style>
 

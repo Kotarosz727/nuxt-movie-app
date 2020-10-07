@@ -2,7 +2,6 @@
     <div>
         <Header />
         <div class="main">
-            <div class="header"><h3>高評価</h3></div>
             <Menu />
             <div class="f-container">
                 <div class="f-item" v-for="data in datas" :key="data.id">
@@ -71,5 +70,9 @@
             })
             },
         },
+        mounted() {
+            let elm = document.getElementById('rated_menu')
+            elm.style.cssText = "color: blue; background-color: yellow"
+        }
     }
 </script>
