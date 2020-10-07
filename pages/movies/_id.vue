@@ -6,8 +6,8 @@
                 <div class="detail_image">
                     <img v-bind:src="imgPreUrl + detail.poster_path" alt="img">
                     <div id="msg"></div>
-                    <button v-if="favorite.length" @click="removeFavorite(detail.id)">見たいリストから解除</button>
-                    <button v-else @click="addFavorite(detail.id, detail.original_title, detail.poster_path)">見たいリストに追加</button>
+                    <v-btn v-if="favorite.length" @click="removeFavorite(detail.id)" elevation="10" medium>見たいリストから解除</v-btn>
+                    <v-btn v-else @click="addFavorite(detail.id, detail.original_title, detail.poster_path)" elevation="7" medium>見たいリストに追加</v-btn>
                 </div>
                 <div class="info">
                     <div class="title">
