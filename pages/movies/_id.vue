@@ -90,9 +90,9 @@
     import firebase from '~/plugins/firebase'
     import { firestoreAction } from 'vuexfire'
     const axios = require('axios')
-    let base_url = 'https://api.themoviedb.org';
-	let sub_url = '/3/movie/'; 
-    let api_key = process.env.MOVIE_API_KEY;
+    const base_url = 'https://api.themoviedb.org';
+	const sub_url = '/3/movie/'; 
+    const api_key = process.env.MOVIE_API_KEY;
 
     export default {
         created: function() {

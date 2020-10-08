@@ -28,11 +28,11 @@
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
     const axios = require('axios')
-	let base_url = 'https://api.themoviedb.org';
-	let sub_url = '/3/movie/'; 
-	let country_url = '&language=en-US'
-	let api_key = process.env.MOVIE_API_KEY;
-	let top_rated_url = base_url + sub_url + 'top_rated?' + api_key + country_url;
+	const base_url = 'https://api.themoviedb.org';
+	const sub_url = '/3/movie/'; 
+	const country_url = '&language=en-US'
+	const api_key = process.env.MOVIE_API_KEY;
+	const top_rated_url = base_url + sub_url + 'top_rated?' + api_key + country_url;
 
     export default {
         data: function() {
@@ -56,7 +56,6 @@
                 },
             }).then(({ data }) => {
                 const datas = data.results;
-                console.log(datas);
                 if (datas.length) {
                     this.page += 1;
                     this.datas.push(...datas);

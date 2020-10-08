@@ -42,10 +42,10 @@
 
 <script>
     const axios = require('axios')
-	let base_url = 'https://api.themoviedb.org';
-	let sub_url = '/3/search/movie?'; 
-	let api_key = process.env.MOVIE_API_KEY;
-    let url = base_url+sub_url+'now_playing?'+api_key+'&language=ja'
+	const base_url = 'https://api.themoviedb.org';
+	const sub_url = '/3/search/movie?'; 
+	const api_key = process.env.MOVIE_API_KEY;
+    const url = base_url+sub_url+'now_playing?'+api_key+'&language=ja'
 
     export default {
         data: function(){
